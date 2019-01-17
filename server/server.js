@@ -4,7 +4,7 @@
 // mongoose.connect('mongodb://localhost:27017/TodoApp');
 var express = require('express');
 var bodyParser = require('body-parser');
-var ObjectId = require('mongodb').ObjectID
+var{ObjectID} = require('mongodb');
 
 
 var {mongoose} = require('./db/mongoose');
@@ -36,14 +36,10 @@ res.status(400).send(e);
 })
 });
 
-// app.get('/todos/:id',(req,res)=>{
-//     res.send(req.params);
-// });
-
 app.get('/todos/:id',(req, res)=>{
     var id = req.params.id;
 
-    if(!ObjectId.isValid(id)){
+    if(!ObjectID.isValid(id)){
         return res.status(404).send();
     }
     Todo.findById(id).then((todo)=>{
